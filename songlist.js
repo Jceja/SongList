@@ -10,17 +10,17 @@ function Song(title,artist,album,year)
   this.album = album;
   this.year = year;
   this.toString = function(){
-    return title + " by " + artist;
+    return this.title + " by " + this.artist;
   }
   this.releaseInfo = function(){
-    return "Released on " + album + " in " + year;
+    return "Released on " + this.album + " in " + this.year;
   };
-  this.listened = 0;
+  this.listened = 0 ;
   this.play = function(){
-    listened++;
+    this.listened++;
   };
-}
 
+}
 //Adds new instances of songs to the list
 function loadList()
 {
@@ -29,7 +29,9 @@ function loadList()
   allSongs.push(new Song("Get Lucky","Daft Punk","Random Access Memories",2013));
   allSongs.push(new Song("Inevitable","Shakira","Dónde Están los Ladrones?",1998));
   allSongs.push(new Song("Wagon Wheel","Old Crow Medicine Show","Old Crow Medicine Show",2004));
+  displaySong();
 }
+
 
 //Progresses to the next song to the list, or if the end of the list has been
 //reached, then loop back to the beginning
@@ -43,4 +45,7 @@ function nextSong()
 function displaySong()
 {
   document.getElementById("nowPlaying").innerHTML = allSongs[current].toString();
+  document.getElementById("albumPlaying").innerHTML=allSongs[current].releaseInfo();
+  document.getElementById("listenTimes").innerHTML=allSongs[current].listened;
+  allSongs[current].play();
 }
